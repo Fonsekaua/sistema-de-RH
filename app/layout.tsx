@@ -1,6 +1,8 @@
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { FuncionariosProvider } from "@/context/FuncionarioContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,7 +25,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="bg-gray-900 text-gray-50 min-h-full flex flex-col items-center">
+        <FuncionariosProvider>
+          {children}
+        </FuncionariosProvider>
+      </body>
     </html>
   );
 }
