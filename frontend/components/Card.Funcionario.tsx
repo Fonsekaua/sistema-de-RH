@@ -9,7 +9,7 @@ type Props = {
 export default function CardFuncionario({ Funcionarios }: Props) {
     const [style,setStyle] = useState('');
     const {setEdit,setModal,setDel} = Context();
-    const {id, nome, sobrenome, cargo, salario } = Funcionarios
+    const {id, nome, sobrenome, cargo, idade, salario } = Funcionarios
     useEffect(() => {
         (() => {
             switch(cargo.toLowerCase()) {
@@ -36,7 +36,7 @@ export default function CardFuncionario({ Funcionarios }: Props) {
                 <div className="flex justify-between border-t border-b border-gray-700 py-3">
                     <div>
                         <span className="text-gray-400 text-sm">Idade</span>
-                        <p className="text-white font-medium">25 anos</p>
+                        <p className="text-white font-medium">{idade} anos</p>
                     </div>
 
                     <div className="text-right">
@@ -61,7 +61,7 @@ export default function CardFuncionario({ Funcionarios }: Props) {
                     setDel(id as number)
                     setModal(prev => !prev)
                 }}>
-                    deletar 
+                    demitir 
                 </button>
                 <button className='bg-emerald-500 border-emerald-400' onClick={() => {
                     setEdit(id as number)

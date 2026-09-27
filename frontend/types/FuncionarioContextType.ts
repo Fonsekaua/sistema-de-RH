@@ -14,7 +14,8 @@ export type FuncionarioContextType = {
     setModal:  React.Dispatch<React.SetStateAction<boolean>>
 
     funcionario: FuncionariosType
-    handleChangeValueInput: (e: React.ChangeEvent<HTMLInputElement>) => void
+    setFuncionario: React.Dispatch<React.SetStateAction<FuncionariosType>>
+    handleChangeValue: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void
 
     edit: number | null
     setEdit: React.Dispatch<React.SetStateAction<number | null>>
@@ -25,7 +26,9 @@ export type FuncionarioContextType = {
     handleNullValue: () => void
 
     handleFilterEmployee: (id: number) => FuncionariosType | undefined
+    
+    formErro: string 
+    setFormErro: (e: string) => void
 
-    erro: string 
-    setErro: (e: string) => void
+    handleSubmit: (e: React.SubmitEvent<HTMLFormElement>) => void
 }

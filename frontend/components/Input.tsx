@@ -14,28 +14,36 @@ export default function Input({
 
     const {
         funcionario,
-        handleChangeValueInput,
-        erro,
-        setErro
+        handleChangeValue,
     } = Context();
+    const [erro, setErro] = useState('');
     const handleVerifyValue = (e: ChangeEvent<HTMLInputElement>) => {
-        const { name, value, type } = e.target
-        const regex = /^[A-Za-z]+$/;
-        if (type == "text") {
-            if (value.length > 0 && !regex.test(value.trim())) {
-                setErro('Campo de texto não pode ter numeros!')
-            } else {
-                setErro("")
-            }
+        const { value, type } = e.target;
 
-        } else if (type == "number") {
-            if (value.length > 0 && regex.test(value.trim())) {
-                setErro('Campo de numero não pode ter textos!')
+        const regexText = /^[A-Za-zÀ-ÿ\s]+$/;
+        const regexNumber = /^\d+$/;
+
+        if (value.length === 0) {
+            setErro("");
+            return;
+        }
+
+        if (type === "text") {
+            if (!regexText.test(value.trim())) {
+                setErro("Campo com caracteres inválidos!");
             } else {
-                setErro("")
+                setErro("");
             }
         }
-    }
+
+        if (type === "number") {
+            if (!regexNumber.test(value.trim())) {
+                setErro("Campo com caracteres inválidos!");
+            } else {
+                setErro("");
+            }
+        }
+    };
     return (
         <label
             htmlFor={name}
@@ -51,11 +59,11 @@ export default function Input({
                 placeholder={placeholder}
                 value={funcionario[name as keyof FuncionariosType]}
                 onChange={(e) => {
-                    handleChangeValueInput(e)
+                    handleChangeValue(e)
                     handleVerifyValue(e)
                 }}
                 className={`py-2 px-1 bg-gray-900 shadow shadow-gray-800 rounded-sm ${erro && "outline outline-rose-500 text-rose-800"}`}
-                required
+
                 min={0}
             />
             {

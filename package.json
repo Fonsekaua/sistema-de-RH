@@ -1,0 +1,26 @@
+{
+  "name": "sistema-de-rh",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "back": "php -S localhost:8080 -t backend",
+    "front": "npm --prefix frontend run dev",
+    "dev": "concurrently \"npm run front\" \"npm run back\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fonsekaua/sistema-de-RH.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Fonsekaua/sistema-de-RH/issues"
+  },
+  "homepage": "https://github.com/Fonsekaua/sistema-de-RH#readme",
+  "devDependencies": {
+    "concurrently": "^10.0.5"
+  }
+}

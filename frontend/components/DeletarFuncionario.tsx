@@ -4,7 +4,7 @@ import { Context } from "@/context/FuncionarioContext"
 import CancelButton from "./CancelButton";
 
 export default function DeletarFuncionario() {
-    const {del,handleNullValue,handleFilterEmployee} = Context();
+    const {del,handleFilterEmployee} = Context();
     const funcionario = handleFilterEmployee(del as number);
     return (
 
@@ -13,11 +13,11 @@ export default function DeletarFuncionario() {
 
         <div className="mb-5">
             <h2 className="text-xl font-bold text-white">
-                Excluir funcionário
+                Demitir funcionário
             </h2>
 
             <p className="mt-2 text-sm text-gray-400">
-                Tem certeza que deseja excluir este funcionário?
+                Tem certeza que deseja <span className="font-bold underline">demitir</span> este funcionário?
                 Essa ação não poderá ser desfeita.
             </p>
         </div>
