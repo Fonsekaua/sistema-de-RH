@@ -3,7 +3,7 @@
 declare(strict_types=1);
 abstract class Funcionario
 {
-    function __construct( protected string $nome, protected string $sobrenome, protected string $email, protected float $salario)
+    function __construct(protected string $nome, protected string $sobrenome, protected int $idade, protected float $salario)
     {
         if ($this->salario < 0) {
             $this->salario = 0;
@@ -19,8 +19,8 @@ abstract class Funcionario
     {
         return $this->sobrenome;
     }
-    public function getEmail(): string{
-        return $this->email;
+    public function getIdade(): int {
+        return $this->idade;
     }
     public function getSalario(): float
     {

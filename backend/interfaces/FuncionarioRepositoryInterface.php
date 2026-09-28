@@ -5,7 +5,7 @@ interface FuncionarioRepositoryInterface {
     public function cadastrarFuncionario(Funcionario $funcionario): void;
     public function listarTodosFuncionarios(): array;
     public function buscarFuncionario(int $id): array | string;
-    public function atualizarFuncionario(int $id, string $nome, string $sobrenome, float $salario): void;
+    public function atualizarFuncionario(int $id, string $nome, string $sobrenome, int $idade, float $salario): void;
     public function deletarFuncionario(int $id): void;
 }
 ?>

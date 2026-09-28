@@ -17,11 +17,10 @@ export default function Input({
         handleChangeValue,
     } = Context();
     const [erro, setErro] = useState('');
+    const regexText = /^[A-Za-zÀ-ÿ\s]+$/;
+    const regexNumber = /^\d+$/;
     const handleVerifyValue = (e: ChangeEvent<HTMLInputElement>) => {
         const { value, type } = e.target;
-
-        const regexText = /^[A-Za-zÀ-ÿ\s]+$/;
-        const regexNumber = /^\d+$/;
 
         if (value.length === 0) {
             setErro("");
@@ -36,7 +35,7 @@ export default function Input({
             }
         }
 
-        if (type === "number") {
+        else if (type === "number") {
             if (!regexNumber.test(value.trim())) {
                 setErro("Campo com caracteres inválidos!");
             } else {

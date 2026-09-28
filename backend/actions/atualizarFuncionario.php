@@ -6,15 +6,33 @@ require_once __DIR__ . "/../repositories/FuncionarioRepositoryJson.php";
 
 $funcionarioRepository = new FuncionarioRepositoryJson();
 
-$id = $_GET["id"];
+$id = (int) $_GET["id"];
 
 $dados = json_decode(file_get_contents("php://input"), true);
-
+if(!$dados) {
+    echo json_encode([
+        "status" => false,
+        "mensagem" => "Corpo da requisição vazio"
+    ]);
+    return;
+}
 $nome = $dados["nome"];
 $sobrenome = $dados["sobrenome"];
+$idade = $dados['idade'];
 $salario = $dados["salario"];
 
-echo $id;
-echo $nome;
+$funcionario = [
+    "id" => $dados['id'], 
+    "nome" => $nome,
+    "idade" => $idade,
+    "sobrenome" => $sobrenome,
+    "salario" => $salario
+];
+$funcionarioRepository->atualizarFuncionario($id,$nome,$sobrenome,$idade, $salario);
+echo json_encode([
+    "status" => true,
+    "mensagem" => "Funcionario atualizado com sucesso!",
+    "funcionario" => $funcionario
+],JSON_UNESCAPED_UNICODE);
 
 ?>

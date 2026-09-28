@@ -43,8 +43,8 @@ export default function Home() {
         </div>
          <div className="w-full flex justify-center gap-4.5 flex-wrap">
            {
-            funcionariosFilterLista.map(funcionario => (
-              <CardFuncionario  key={funcionario.id as number} Funcionarios={funcionario} />
+            funcionariosFilterLista.map((funcionario,index) => (
+              <CardFuncionario  key={index} Funcionarios={funcionario} />
             ))
            }
          </div>

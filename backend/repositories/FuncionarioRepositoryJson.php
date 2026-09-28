@@ -12,7 +12,7 @@ class FuncionarioRepositoryJson implements FuncionarioRepositoryInterface
     }
     public function carregarDados(): array
     {
-        if (!file_exists($this->caminhoArquivo))  {
+        if (!file_exists($this->caminhoArquivo)) {
             return [];
         }
         $conteudo = file_get_contents($this->caminhoArquivo);
@@ -28,7 +28,7 @@ class FuncionarioRepositoryJson implements FuncionarioRepositoryInterface
     {
         file_put_contents($this->caminhoArquivo, json_encode($dados, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
     }
-    
+
     public function cadastrarFuncionario(Funcionario $funcionario): void
     {
         $funcionarios = $this->carregarDados();
@@ -74,21 +74,29 @@ class FuncionarioRepositoryJson implements FuncionarioRepositoryInterface
         return "Funcionário não encontrado <br>";
     }
 
-    public function atualizarFuncionario(int $id, string $nome, string $sobrenome, float $salario): void
-    {
+    public function atualizarFuncionario(
+        int $id,
+        string $nome,
+        string $sobrenome,
+        int $idade,
+        float $salario
+    ): void {
         $funcionarios = $this->carregarDados();
 
-        foreach ($funcionarios as $funcionario) {
+        foreach ($funcionarios as &$funcionario) {
             if ($funcionario['id'] === $id) {
                 $funcionario['nome'] = $nome;
+                $funcionario['sobrenome'] = $sobrenome;
+                $funcionario['idade'] = $idade;
                 $funcionario['salario'] = $salario;
 
                 $this->salvarDados($funcionarios);
 
                 echo "Funcionário atualizado com sucesso <br>";
+                return;
             }
         }
-        
+
         echo "Funcionário não encontrado <br>";
     }
 

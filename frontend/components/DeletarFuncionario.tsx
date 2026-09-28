@@ -4,12 +4,16 @@ import { Context } from "@/context/FuncionarioContext"
 import CancelButton from "./CancelButton";
 
 export default function DeletarFuncionario() {
-    const {del,handleFilterEmployee} = Context();
+    const {del,handleFilterEmployee,setDel,handleDelete,setModal} = Context();
     const funcionario = handleFilterEmployee(del as number);
     return (
 
 
-    <form className="w-full max-w-md rounded-xl border border-gray-700 bg-gray-900 p-6 shadow-2xl">
+    <form className="w-full max-w-md rounded-xl border border-gray-700 bg-gray-900 p-6 shadow-2xl" onSubmit={(e) => {
+        e.preventDefault()
+        handleDelete(del as number)
+        setModal(false)
+    }}>
 
         <div className="mb-5">
             <h2 className="text-xl font-bold text-white">

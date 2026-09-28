@@ -27,6 +27,8 @@ export type FuncionarioContextType = {
 
     handleFilterEmployee: (id: number) => FuncionariosType | undefined
     
+    handleDelete: (id: number) => void
+
     formErro: string 
     setFormErro: (e: string) => void
 

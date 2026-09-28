@@ -1,5 +1,6 @@
 'use client'
 
+import { adicionarFuncionario, atualizarFuncionario, buscarTodosFuncionarios, deletarFuncionario } from "@/services/apiServices";
 import { Children } from "@/types/Children";
 import { FuncionarioContextType } from "@/types/FuncionarioContextType";
 import { FuncionariosType } from "@/types/FuncionariosType";
@@ -17,12 +18,11 @@ export const FuncionariosProvider = ({ children }: Children) => {
     const [funcionariosLista, setFuncionariosLista] = useState<FuncionariosType[]>([]);
 
     const estatico: FuncionariosType = {
-        id: '',
-        nome: 'nome aleatorio',
-        sobrenome: 'sobrenome aleatorio',
-        cargo: 'advogado',
-        idade: 19,
-        salario: 1000,
+        nome: '',
+        sobrenome: '',
+        cargo: '',
+        idade: 0,
+        salario: 0,
 
     }
     const [edit, setEdit] = useState<number | null>(null);
@@ -75,8 +75,6 @@ export const FuncionariosProvider = ({ children }: Children) => {
     const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
         setFormErro("");
-        funcionario.id =
-            Math.max(...funcionariosLista.map(f => f.id as number), 0) + 1;
         const possuiCampoVazio = Object.values(funcionario).some(
             valor => valor === "" || valor === null || valor === undefined
         );
@@ -124,42 +122,43 @@ export const FuncionariosProvider = ({ children }: Children) => {
             return;
         }
         if (edit) {
-            const response = await fetch(`http://localhost:8080/funcionario`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(funcionario),
-            });
-            if (!response.ok) {
-                throw new Error("Erro ao atualizar funcionário");
+            const funcionarioEditado = await atualizarFuncionario(edit, funcionario);
+
+            if (funcionarioEditado) {
+                setFuncionariosLista(prev =>
+                    prev.map(f =>
+                        f.id === edit ? funcionario : f
+                    )
+                );
             }
-            return;
         }
-        const response = await fetch(`http://localhost:8080/funcionario`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(funcionario),
-        });
-        if (!response.ok) {
-            throw new Error("Erro ao criar funcionário");
+        const novoUsuario = await adicionarFuncionario(funcionario);
+        if (novoUsuario) {
+            setFuncionariosLista(prev => [
+                ...prev, funcionario
+            ])
+            setFuncionario(estatico);
         }
+        setModal(prev => !prev);
 
     };
+
+    const handleDelete = async (id: number) => {
+        const funcionarioDeletado = await deletarFuncionario(id);
+        if(funcionarioDeletado) {
+            setFuncionariosLista(prev => {
+                return prev.filter(e => e.id != id)
+            })
+            setModal(prev => !prev);
+            handleNullValue()
+        }
+    }
     useEffect(() => {
 
         async function buscarFuncionarios() {
-
-            const response = await fetch(
-                'http://localhost:8080/funcionarios'
-            );
-
-            const data: FuncionariosType[] =
-                await response.json();
-
-            setFuncionariosLista(data);
+            const funcionarios = await buscarTodosFuncionarios();
+            if (!funcionarios) return;
+            setFuncionariosLista(funcionarios);
         }
 
         buscarFuncionarios();
@@ -221,6 +220,8 @@ export const FuncionariosProvider = ({ children }: Children) => {
 
         modal,
         setModal,
+
+        handleDelete,
 
         funcionario,
         setFuncionario,
