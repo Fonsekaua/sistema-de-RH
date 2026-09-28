@@ -18,8 +18,8 @@ if(!$dados) {
 }
 $nome = $dados["nome"];
 $sobrenome = $dados["sobrenome"];
-$idade = $dados['idade'];
-$salario = $dados["salario"];
+$idade = (int) $dados['idade'];
+$salario =(float) $dados["salario"];
 
 $funcionario = [
     "id" => $dados['id'], 

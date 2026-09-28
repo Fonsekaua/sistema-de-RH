@@ -52,7 +52,7 @@ export const FuncionariosProvider = ({ children }: Children) => {
     }
 
     const handleFilterEmployee = (id: number) => {
-        return funcionariosLista.find(f => Number(f.id) === id )
+        return funcionariosLista.find(f => Number(f.id) === id)
     }
     useEffect(() => {
         (() => {
@@ -131,14 +131,17 @@ export const FuncionariosProvider = ({ children }: Children) => {
                     )
                 );
             }
-        }
-        const novoUsuario = await adicionarFuncionario(funcionario);
-        console.log(novoUsuario)
-        if (novoUsuario) {
-            setFuncionariosLista(prev => [
-                ...prev, funcionario
-            ])
-            setFuncionario(estatico);
+            setEdit(null)
+
+        } else {
+            const novoUsuario = await adicionarFuncionario(funcionario);
+            console.log(novoUsuario)
+            if (novoUsuario) {
+                setFuncionariosLista(prev => [
+                    ...prev, funcionario
+                ])
+                setFuncionario(estatico);
+            }
         }
         setModal(prev => !prev);
 
@@ -146,7 +149,7 @@ export const FuncionariosProvider = ({ children }: Children) => {
 
     const handleDelete = async (id: number) => {
         const funcionarioDeletado = await deletarFuncionario(id);
-        if(funcionarioDeletado) {
+        if (funcionarioDeletado) {
             setFuncionariosLista(prev => {
                 return prev.filter(e => Number(e.id) != id)
             })

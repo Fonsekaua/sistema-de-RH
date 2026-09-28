@@ -49,6 +49,7 @@ echo json_encode([
     "status" => true,
     "mensagem" => "Funcionário criado com sucesso!",
     "funcionario" => [
+        
         "nome" => $funcionario->getNome(),
         "sobrenome" => $funcionario->getSobrenome(),
         "idade" => $funcionario->getIdade(),

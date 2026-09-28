@@ -1,16 +1,10 @@
 [
     {
         "id": 1,
-        "nome": "Jhon",
-        "sobrenome": "Doe",
+        "nome": "Hildemar",
+        "sobrenome": "Lima",
         "cargo": "Advogado",
-        "salario": 2000
-    },
-    {
-        "id": 2,
-        "nome": "Jhon",
-        "sobrenome": "jjkj",
-        "cargo": "Advogado",
-        "salario": 444
+        "idade": 45,
+        "salario": 5000
     }
 ]

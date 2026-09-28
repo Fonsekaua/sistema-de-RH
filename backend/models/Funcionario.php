@@ -20,7 +20,7 @@ abstract class Funcionario
         return $this->sobrenome;
     }
     public function getIdade(): int {
-        return $this->idade;
+        return $this->idade ? $this->idade : 18;
     }
     public function getSalario(): float
     {
