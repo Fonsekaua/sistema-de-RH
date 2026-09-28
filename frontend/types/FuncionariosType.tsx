@@ -1,8 +1,8 @@
 export type FuncionariosType = {
-    id?: number | string
+    id?: string
     nome: string
     sobrenome: string
-    idade: number
-    salario: number
+    idade: string 
+    salario: string
     cargo: string
 }

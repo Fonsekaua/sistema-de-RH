@@ -19,8 +19,12 @@ export default function FormFuncionario() {
                     <span>Cargo</span>
                     <select name="cargo" id="" value={funcionario.cargo} className='bg-gray-900 px-0.5 py-2.5 rounded-sm text-white outline-none' onChange={handleChangeValue} >
                         <option value="" className=''>Selecione seu cargo</option>
-                        <option value="advogado">advogado</option>
-                        <option value="carpinteiro">carpinteiro</option>
+                        <option value="Advogado">Advogado</option>
+                        <option value="Carpinteiro">Carpinteiro</option>
+                        <option value="Contador">Contador</option>
+                        <option value="Gerente">Gerente</option>
+                        <option value="Engenheiro">Engenheiro</option>
+                        <option value="Professor">Professor</option>
                     </select>
                 </label>
             </div>

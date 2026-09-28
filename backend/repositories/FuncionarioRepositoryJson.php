@@ -43,7 +43,7 @@ class FuncionarioRepositoryJson implements FuncionarioRepositoryInterface
             'id' => $novoId,
             'nome' => $funcionario->getNome(),
             'sobrenome' => $funcionario->getSobrenome(),
-            'cargo' => $funcionario->setCargo(),
+            'cargo' => $funcionario->getCargo(),
             'salario' => $funcionario->getSalario()
         ];
 

@@ -21,8 +21,8 @@ export const FuncionariosProvider = ({ children }: Children) => {
         nome: '',
         sobrenome: '',
         cargo: '',
-        idade: 0,
-        salario: 0,
+        idade: '',
+        salario: '',
 
     }
     const [edit, setEdit] = useState<number | null>(null);
@@ -52,7 +52,7 @@ export const FuncionariosProvider = ({ children }: Children) => {
     }
 
     const handleFilterEmployee = (id: number) => {
-        return funcionariosLista.find(f => f.id === id as number)
+        return funcionariosLista.find(f => Number(f.id) === id )
     }
     useEffect(() => {
         (() => {
@@ -102,7 +102,7 @@ export const FuncionariosProvider = ({ children }: Children) => {
             return;
         }
 
-        if (funcionario.salario < 0) {
+        if (Number(funcionario.salario) < 0) {
             setFormErro("Salário não pode ser menor que zero");
             return;
         }
@@ -112,7 +112,7 @@ export const FuncionariosProvider = ({ children }: Children) => {
             return;
         }
 
-        if (funcionario.idade < 18) {
+        if (Number(funcionario.idade) < 18) {
             setFormErro("Funcionário não pode ter menos de 18 anos");
             return;
         }
@@ -127,12 +127,13 @@ export const FuncionariosProvider = ({ children }: Children) => {
             if (funcionarioEditado) {
                 setFuncionariosLista(prev =>
                     prev.map(f =>
-                        f.id === edit ? funcionario : f
+                        Number(f.id) === edit ? funcionario : f
                     )
                 );
             }
         }
         const novoUsuario = await adicionarFuncionario(funcionario);
+        console.log(novoUsuario)
         if (novoUsuario) {
             setFuncionariosLista(prev => [
                 ...prev, funcionario
@@ -147,7 +148,7 @@ export const FuncionariosProvider = ({ children }: Children) => {
         const funcionarioDeletado = await deletarFuncionario(id);
         if(funcionarioDeletado) {
             setFuncionariosLista(prev => {
-                return prev.filter(e => e.id != id)
+                return prev.filter(e => Number(e.id) != id)
             })
             setModal(prev => !prev);
             handleNullValue()

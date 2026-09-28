@@ -28,5 +28,5 @@ abstract class Funcionario
     }
 
     abstract public function calcularBonificacao(): float;
-    abstract public function setCargo(): string;
+    abstract public function getCargo(): string;
 }

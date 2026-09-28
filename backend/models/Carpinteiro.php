@@ -10,7 +10,7 @@ class Carpinteiro extends Funcionario
     {
         return $this->salario + 100;
     }
-    public function setCargo() : string {
+    public function getCargo() : string {
         return "Carpinteiro";
     }
 }

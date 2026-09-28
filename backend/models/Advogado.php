@@ -10,7 +10,7 @@ class Advogado extends Funcionario
     {
         return $this->salario + 500;
     }
-    public function setCargo(): string {
+    public function getCargo(): string {
         return "Advogado";
     }
 

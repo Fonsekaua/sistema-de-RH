@@ -5,8 +5,13 @@ declare(strict_types=1);
 header('Content-Type: application/json; charset=utf-8');
 
 require_once __DIR__ . "/../repositories/FuncionarioRepositoryJson.php";
-require_once __DIR__ . "/../models/Advogado.php";
-require_once __DIR__ . "/../models/Carpinteiro.php";
+require_once __DIR__ . '/../models/Funcionario.php';
+require_once __DIR__ . '/../models/Advogado.php';
+require_once __DIR__ . '/../models/Carpinteiro.php';
+require_once __DIR__ . '/../models/Engenheiro.php';
+require_once __DIR__ . '/../models/Contador.php';
+require_once __DIR__ . '/../models/Professor.php';
+require_once __DIR__ . '/../models/Gerente.php';
 
 $funcionarioRepository = new FuncionarioRepositoryJson();
 
@@ -27,40 +32,17 @@ if (!is_array($dados)) {
 
 $nome = $dados["nome"];
 $sobrenome = $dados["sobrenome"];
-$idade = $dados["idade"];
+$idade = (int) $dados["idade"];
 $cargo = $dados["cargo"];
-$salario = $dados["salario"];
+$salario = (float) $dados["salario"];
 
-if (strtolower($cargo) === "advogado") {
-
-    $funcionario = new Advogado(
+  $funcionario = new $cargo(
         $nome,
         $sobrenome,
         $idade,
         $salario
     );
-
-} elseif (strtolower($cargo) === "carpinteiro") {
-
-    $funcionario = new Carpinteiro(
-        $nome,
-        $sobrenome,
-        $idade,
-        $salario
-    );
-
-} else {
-
-    http_response_code(400);
-
-    echo json_encode([
-        "status" => false,
-        "mensagem" => "Cargo inválido"
-    ], JSON_UNESCAPED_UNICODE);
-
-    exit;
-}
-
+$funcionario->calcularBonificacao();
 $funcionarioRepository->cadastrarFuncionario($funcionario);
 
 echo json_encode([

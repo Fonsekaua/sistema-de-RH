@@ -10,17 +10,41 @@ export default function CardFuncionario({ Funcionarios }: Props) {
     const [style,setStyle] = useState('');
     const {setEdit,setModal,setDel} = Context();
     const {id, nome, sobrenome, cargo, idade, salario } = Funcionarios
-    useEffect(() => {
-        (() => {
-            switch(cargo.toLowerCase()) {
-                case 'advogado': 
-                    setStyle('border-sky-500 text-sky-500')
-                    break;
-                case 'carpinteiro': 
-                    setStyle('border-orange-500 text-orange-500')
-            }
-        })()
-    },[])
+useEffect(() => {
+    (() => {
+        switch (cargo.toLowerCase()) {
+            case 'advogado':
+                setStyle('border-sky-500 text-sky-500');
+                break;
+
+            case 'carpinteiro':
+                setStyle('border-orange-500 text-orange-500');
+                break;
+
+            case 'engenheiro':
+                setStyle('border-red-500 text-red-500');
+                break;
+
+            case 'contador':
+                setStyle('border-green-500 text-green-500');
+                break;
+
+            case 'professor':
+                setStyle('border-purple-500 text-purple-500');
+                break;
+
+            case 'gerente':
+                setStyle('border-yellow-500 text-yellow-500');
+                break;
+
+            default:
+                setStyle('border-gray-500 text-gray-500');
+                break;
+        }
+    })();
+}, [cargo]);
+
+
     return (
         <article className={`bg-gray-800 p-4 w-60 h-72 rounded-lg flex flex-col relative items-center border ${style}`} >
 
@@ -42,7 +66,7 @@ export default function CardFuncionario({ Funcionarios }: Props) {
                     <div className="text-right">
                         <span className="text-gray-400 text-sm">Salário</span>
                         <p className="text-emerald-400 font-semibold">
-                            {salario.toLocaleString("pt-BR", {
+                            {Number(salario).toLocaleString("pt-BR", {
                                 style: "currency",
                                 currency: "BRL",
                             })}
@@ -58,13 +82,13 @@ export default function CardFuncionario({ Funcionarios }: Props) {
             </div>
             <div className='text-white flex items-center gap-2 *:border *:rounded-lg *:cursor-pointer *:transition-all *:active:scale-95 *:px-3 py-4 *:w-full w-full'>
                 <button className='bg-rose-700 border-rose-500'onClick={() => {
-                    setDel(id as number)
+                    setDel(Number(id))
                     setModal(prev => !prev)
                 }}>
                     demitir 
                 </button>
                 <button className='bg-emerald-500 border-emerald-400' onClick={() => {
-                    setEdit(id as number)
+                    setEdit(Number(id))
                     setModal(prev => !prev)
                 }}>
                     editar
