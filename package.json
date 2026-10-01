@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "back": "php -S localhost:8080 -t backend",
+    "back": "php -S localhost:8080 -t backend/src",
     "front": "npm --prefix frontend run dev",
     "install:frontend": "npm install --prefix frontend",
     "install": "concurrently \"npm run install:frontend\" \"npm install\"",
