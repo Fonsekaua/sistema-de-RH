@@ -18,17 +18,18 @@ if(!$dados) {
 }
 $nome = $dados["nome"];
 $sobrenome = $dados["sobrenome"];
+$cargo = $dados["cargo"];
 $idade = (int) $dados['idade'];
 $salario =(float) $dados["salario"];
 
 $funcionario = [
-    "id" => $dados['id'], 
+    "id" => $id, 
     "nome" => $nome,
     "idade" => $idade,
     "sobrenome" => $sobrenome,
     "salario" => $salario
 ];
-$funcionarioRepository->atualizarFuncionario($id,$nome,$sobrenome,$idade, $salario);
+$funcionarioRepository->atualizarFuncionario($id,$nome,$sobrenome, $cargo,$idade, $salario);
 echo json_encode([
     "status" => true,
     "mensagem" => "Funcionario atualizado com sucesso!",

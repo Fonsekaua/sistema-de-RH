@@ -4,6 +4,7 @@ import { Context } from "@/context/FuncionarioContext"
 
 export default function ToastError() {
     const {formErro} = Context();
+  
   return (
     <div className={`w-sm bg-gray-950 h-48 rounded-lg fixed z-10 top-10 flex flex-col items-center justify-center text-center transition-all duration-800 p-4 gap-2 ${formErro?"translate-y-0 opacity-100":"-translate-y-96 opacity-0"}`}>
         <div className='text-red-600 font-extralight flex flex-col items-center'>

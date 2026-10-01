@@ -18,6 +18,7 @@ export const FuncionariosProvider = ({ children }: Children) => {
     const [funcionariosLista, setFuncionariosLista] = useState<FuncionariosType[]>([]);
 
     const estatico: FuncionariosType = {
+        id:"",
         nome: '',
         sobrenome: '',
         cargo: '',
@@ -75,7 +76,8 @@ export const FuncionariosProvider = ({ children }: Children) => {
     const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
         setFormErro("");
-        const possuiCampoVazio = Object.values(funcionario).some(
+        const {id, ...verificados} = funcionario;
+        const possuiCampoVazio = Object.values(verificados).some(
             valor => valor === "" || valor === null || valor === undefined
         );
 
@@ -134,11 +136,12 @@ export const FuncionariosProvider = ({ children }: Children) => {
             setEdit(null)
 
         } else {
-            const novoUsuario = await adicionarFuncionario(funcionario);
-            console.log(novoUsuario)
+            const {id, ...resto} = funcionario;
+            const novoUsuario = await adicionarFuncionario(resto);
+            
             if (novoUsuario) {
                 setFuncionariosLista(prev => [
-                    ...prev, funcionario
+                    ...prev, novoUsuario
                 ])
                 setFuncionario(estatico);
             }

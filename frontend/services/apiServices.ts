@@ -51,7 +51,9 @@ export const adicionarFuncionario = async (
             funcionario
         );
 
-        return response.data;
+        const funcionarioCriado = response.data.funcionario;
+
+        return funcionarioCriado;
 
     } catch (error) {
 
@@ -62,7 +64,7 @@ export const adicionarFuncionario = async (
             console.log("Erro desconhecido:", error);
         }
     }
-}
+};
 export const atualizarFuncionario = async (id:number, funcionario: FuncionariosType) => {
     try {
 

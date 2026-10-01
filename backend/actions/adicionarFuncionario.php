@@ -12,13 +12,12 @@ require_once __DIR__ . '/../models/Engenheiro.php';
 require_once __DIR__ . '/../models/Contador.php';
 require_once __DIR__ . '/../models/Professor.php';
 require_once __DIR__ . '/../models/Gerente.php';
+require_once __DIR__ . '/../models/Programador.php';
 
 $funcionarioRepository = new FuncionarioRepositoryJson();
 
 $dados = json_decode(file_get_contents("php://input"), true);
-echo json_encode([
-    "mensagem"=> "Voce esta aqui"
-]);
+
 if (!is_array($dados)) {
     http_response_code(400);
 
@@ -29,7 +28,7 @@ if (!is_array($dados)) {
 
     exit;
 }
-
+$id = count($funcionarioRepository->listarTodosFuncionarios()) + 1;
 $nome = $dados["nome"];
 $sobrenome = $dados["sobrenome"];
 $idade = (int) $dados["idade"];
@@ -37,6 +36,7 @@ $cargo = $dados["cargo"];
 $salario = (float) $dados["salario"];
 
   $funcionario = new $cargo(
+        $id,
         $nome,
         $sobrenome,
         $idade,
@@ -49,7 +49,7 @@ echo json_encode([
     "status" => true,
     "mensagem" => "Funcionário criado com sucesso!",
     "funcionario" => [
-        
+        "id" => $funcionario->getId(),
         "nome" => $funcionario->getNome(),
         "sobrenome" => $funcionario->getSobrenome(),
         "idade" => $funcionario->getIdade(),

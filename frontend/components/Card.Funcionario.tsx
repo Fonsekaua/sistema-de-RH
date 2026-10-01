@@ -46,8 +46,8 @@ useEffect(() => {
 
 
     return (
-        <article className={`bg-gray-800 p-4 w-60 h-72 rounded-lg flex flex-col relative items-center border ${style}`} >
-
+        <article className={`bg-gray-800 p-4 w-56 sm:w-72 md:w-56 lg:w-xs xl:w-[18.7rem] 2xl:w-[22.9rem]  relative rounded-lg flex flex-col  items-center border ${style}`} >
+            
             <div className="w-full flex flex-col gap-4 mt-2">
 
                 <div className="text-center">

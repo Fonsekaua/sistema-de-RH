@@ -1,5 +1,5 @@
 export type FuncionariosType = {
-    id?: string
+    id?: string 
     nome: string
     sobrenome: string
     idade: string 

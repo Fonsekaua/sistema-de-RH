@@ -32,20 +32,14 @@ class FuncionarioRepositoryJson implements FuncionarioRepositoryInterface
     public function cadastrarFuncionario(Funcionario $funcionario): void
     {
         $funcionarios = $this->carregarDados();
-        if (empty($funcionarios)) {
-            $novoId = 1;
-        } else {
-            $ids = array_column($funcionarios, 'id');
-            $novoId = max($ids) + 1;
-        }
 
         $funcionarios[] = [
-            'id' => $novoId,
+            'id' => $funcionario->getId(),
             'nome' => $funcionario->getNome(),
             'sobrenome' => $funcionario->getSobrenome(),
             'cargo' => $funcionario->getCargo(),
             "idade" => $funcionario->getIdade(),
-            'salario' => $funcionario->getSalario()
+            'salario' => $funcionario->getSalario() 
         ];
 
         $this->salvarDados($funcionarios);
@@ -79,6 +73,7 @@ class FuncionarioRepositoryJson implements FuncionarioRepositoryInterface
         int $id,
         string $nome,
         string $sobrenome,
+        string $cargo,
         int $idade,
         float $salario
     ): void {
@@ -89,6 +84,7 @@ class FuncionarioRepositoryJson implements FuncionarioRepositoryInterface
                 $funcionario['nome'] = $nome;
                 $funcionario['sobrenome'] = $sobrenome;
                 $funcionario['idade'] = $idade;
+                $funcionario['cargo'] = $cargo;
                 $funcionario['salario'] = $salario;
 
                 $this->salvarDados($funcionarios);

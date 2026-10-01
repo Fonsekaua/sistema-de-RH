@@ -6,7 +6,7 @@ import CancelButton from './CancelButton'
 export default function FormFuncionario() {
     const { edit, handleSubmit, funcionario, handleChangeValue } = Context()
     return (
-        <form className='bg-gray-950 p-3 rounded-lg w-lg flex flex-col items-center gap-10' onSubmit={handleSubmit}>
+        <form className='bg-gray-950 p-3 rounded-lg w-auto lg:w-lg flex flex-col items-center gap-10' onSubmit={handleSubmit}>
             <h2 className='text-2xl font-bold text-sky-600'>{edit ? "Editar" : "Cadastrar"} Funcionario</h2>
             <div className='flex flex-col gap-5 w-full'>
                 <Input label='Nome' name='nome' placeholder='Digite seu nome...' type='string' />

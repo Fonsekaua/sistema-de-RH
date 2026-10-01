@@ -5,12 +5,14 @@ import FormFuncionario from "@/components/Form.Funcionario";
 import Modal from "@/components/Modal";
 import ToastError from "@/components/ToastError";
 import { Context } from "@/context/FuncionarioContext";
-import { BiSad } from "react-icons/bi";
-import { FaSadTear } from "react-icons/fa";
+import { useEffect, useState } from "react";
 import { MdSentimentDissatisfied } from "react-icons/md";
 export default function Home() {
   const { funcionariosFilterLista, filtro, setModal, del, setFiltro, funcionariosLista } = Context()
+  const [quantidade, setQuantidade] = useState<boolean>(funcionariosLista.length % 2 == 0);
+  useEffect(() => {
 
+  },[funcionariosLista])
   return (
     <>
       <Modal>
@@ -24,8 +26,8 @@ export default function Home() {
       </Modal>
 
       <ToastError />
-      <section className="container py-5 flex items-center justify-between">
-        <div className="flex items-center gap-4">
+      <section className="container px-2 py-5 flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-4">
           <h2 className="font-bold text-2xl">Sistema do RH</h2>
           <small className=" bg-emerald-500 rounded-full px-2">Funcionarios no sistema: {funcionariosLista.length}</small>
         </div>
@@ -34,7 +36,7 @@ export default function Home() {
         </button>
       </section>
 
-      <section className="container flex flex-col gap-5 items-center">
+      <section className="container px-2 flex flex-col gap-5 items-center">
         <div className="bg-gray-800 py-1.5 px-2 rounded-lg justify-between w-full flex items-center">
           <h2 className="text-xl">
             Funcionário
@@ -51,21 +53,23 @@ export default function Home() {
             <option value="Professor">Professor</option>
           </select>
         </div>
-        <div className="w-full items-center flex justify-center gap-4.5 flex-wrap">
+        <div className={`w-full items-center flex ${quantidade ? 'justify-center' : 'justify-between'} gap-4.5 flex-wrap`}>
           {
             funcionariosLista.length > 0 ? (
               funcionariosFilterLista.map((funcionario, index) => (
                 <CardFuncionario key={index} Funcionarios={funcionario} />
               ))
             ) : (
-              <div className="text-gray-400 translate-y-52 text-2xl flex flex-col items-center gap-4">
-                <MdSentimentDissatisfied size={100} />
-                <h2 className="font-bold">Nenhum funcionario cadastrado em nosso sistema.</h2>
+              <div className="text-gray-400 translate-y-52 text-2xl flex flex-col items-center gap-4 text-center">
+                <MdSentimentDissatisfied className="text-6xl  sm:text-8xl" />
+                <h2 className="font-bold text-xl w-xs sm:w-auto sm:text-2xl lg:text-3xl">
+                  Nenhum {filtro.toLowerCase() || 'funcionário'} cadastrado em nosso sistema.</h2>
               </div>
             )
           }
         </div>
       </section>
+      
     </>
   );
 }
