@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/Funcionario.php';
+namespace App\Models;
 
 class Carpinteiro extends Funcionario
 {
@@ -10,7 +10,8 @@ class Carpinteiro extends Funcionario
     {
         return $this->salario + 100;
     }
-    public function getCargo() : string {
+    public function getCargo(): string
+    {
         return "Carpinteiro";
     }
 }

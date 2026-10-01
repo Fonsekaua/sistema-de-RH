@@ -70,7 +70,7 @@ export const FuncionariosProvider = ({ children }: Children) => {
         (() => {
             setTimeout(() => {
                 setFormErro('')
-            }, 3000);
+            }, 4000);
         })()
     }, [formErro])
     const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {

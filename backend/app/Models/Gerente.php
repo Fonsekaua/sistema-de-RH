@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/Funcionario.php';
+namespace App\Models;
 
 class Gerente extends Funcionario
 {

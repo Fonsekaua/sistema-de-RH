@@ -1,6 +1,10 @@
 <?php
 declare(strict_types=1);
-require_once __DIR__ . "/../models/Funcionario.php";
+
+namespace App\Interfaces;
+
+use App\Models\Funcionario;
+
 interface FuncionarioRepositoryInterface {
     public function cadastrarFuncionario(Funcionario $funcionario): void;
     public function listarTodosFuncionarios(): array;

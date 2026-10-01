@@ -6,6 +6,8 @@
   "scripts": {
     "back": "php -S localhost:8080 -t backend",
     "front": "npm --prefix frontend run dev",
+    "install:frontend": "npm install --prefix frontend",
+    "install": "concurrently \"npm run install:frontend\" \"npm install\"",
     "dev": "concurrently \"npm run front\" \"npm run back\""
   },
   "repository": {

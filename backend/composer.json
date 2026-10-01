@@ -1,0 +1,9 @@
+{
+    "name": "indstria4.0/backend",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "require": {}
+}

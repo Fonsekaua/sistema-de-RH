@@ -1,8 +1,13 @@
 <?php
 
 declare(strict_types=1);
-require_once __DIR__ . '/../interfaces/FuncionarioRepositoryInterface.php';
-require_once __DIR__ . '/../models/Funcionario.php';
+
+namespace App\Repositories;
+
+use App\Interfaces\FuncionarioRepositoryInterface;
+
+use App\Models\Funcionario;
+
 class FuncionarioRepositoryJson implements FuncionarioRepositoryInterface
 {
     private string $caminhoArquivo;

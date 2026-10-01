@@ -1,8 +1,11 @@
 <?php
 
 declare(strict_types=1);
+require_once __DIR__ . "/../vendor/autoload.php";
 
-include __DIR__ . "/routes/routes.php";
+use function App\Routes\getRoutes;
+
+$routes = getRoutes();
 
 header('Access-Control-Allow-Origin: http://localhost:3000');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');

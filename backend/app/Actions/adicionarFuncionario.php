@@ -2,17 +2,24 @@
 
 declare(strict_types=1);
 
+namespace App\Actions;
+
 header('Content-Type: application/json; charset=utf-8');
 
+use App\Repositories\FuncionarioRepositoryJson;
+
+use App\Models\Advogado;
+use App\Models\Carpinteiro;
+use App\Models\Contador;
+use App\Models\Engenheiro;
+use App\Models\Funcionario;
+use App\Models\Gerente;
+use App\Models\Professor;
+use App\Models\Programador;
+
+
+
 require_once __DIR__ . "/../repositories/FuncionarioRepositoryJson.php";
-require_once __DIR__ . '/../models/Funcionario.php';
-require_once __DIR__ . '/../models/Advogado.php';
-require_once __DIR__ . '/../models/Carpinteiro.php';
-require_once __DIR__ . '/../models/Engenheiro.php';
-require_once __DIR__ . '/../models/Contador.php';
-require_once __DIR__ . '/../models/Professor.php';
-require_once __DIR__ . '/../models/Gerente.php';
-require_once __DIR__ . '/../models/Programador.php';
 
 $funcionarioRepository = new FuncionarioRepositoryJson();
 
@@ -35,13 +42,13 @@ $idade = (int) $dados["idade"];
 $cargo = $dados["cargo"];
 $salario = (float) $dados["salario"];
 
-  $funcionario = new $cargo(
-        $id,
-        $nome,
-        $sobrenome,
-        $idade,
-        $salario
-    );
+$funcionario = new $cargo(
+    $id,
+    $nome,
+    $sobrenome,
+    $idade,
+    $salario
+);
 $funcionario->calcularBonificacao();
 $funcionarioRepository->cadastrarFuncionario($funcionario);
 
